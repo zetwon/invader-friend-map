@@ -31,6 +31,7 @@
     font-size: 14px;
     font-weight: bold;
     font-family: Helvetica,Arial,sans-serif">
+    <div id="map-legend-users"></div>
     </div>
     <script>
         const iconNames = {
@@ -115,36 +116,77 @@
             "PA_1101","PA_449","PA_1074","PA_1310","PA_1294","PA_1073","PA_423","PA_845","PA_892","PA_844","PA_918","PA_862","PA_476","PA_1160","PA_178","PA_236","PA_1159","PA_268","PA_1004","PA_474","PA_867","PA_1280","PA_660","PA_662","PA_1412","PA_1168","PA_661","PA_1164","PA_1202","PA_903","PA_619","PA_735","PA_1071","PA_1072","PA_124","PA_776","PA_1126","PA_868","PA_413","PA_1397","PA_1080","PA_843","PA_1151","PA_360","PA_563","PA_860","PA_1097","PA_1260","PA_1264","PA_354","PA_92","PA_720","PA_1213","PA_1480","PA_394","PA_1107","PA_184","PA_764","PA_634","PA_1076","PA_1337","PA_592","PA_322","PA_635","PA_1167","PA_627","PA_345","PA_905","PA_1408","PA_741","PA_196","PA_1090","PA_1105","PA_609","PA_990","PA_854","PA_348"
         ];
 
-        const abby_invaders = ["FTBL_37","NY_27","NY_29","NY_31","NY_79","NY_101","NY_153","NY_154","NY_157","NY_158","NY_159","NY_161","NY_162","NY_165","NY_167","NY_168","NY_176","NY_183","NY_185","PA_02","PA_07","PA_61","PA_98","PA_99","PA_109","PA_110","PA_120","PA_144","PA_145","PA_200","PA_218","PA_240","PA_250","PA_270","PA_285","PA_295","PA_328","PA_331","PA_355","PA_362","PA_370","PA_416","PA_430","PA_448","PA_454","PA_468","PA_549","PA_585","PA_587","PA_813","PA_815","PA_839","PA_853","PA_859","PA_870","PA_874","PA_882","PA_926","PA_948","PA_957","PA_1019","PA_1034","PA_1057","PA_1062","PA_1067","PA_1081","PA_1085","PA_1087","PA_1130","PA_1147","PA_1154","PA_1163","PA_1165","PA_1172","PA_1207","PA_1212","PA_1262","PA_1263","PA_1268","PA_1324","PA_1404","PA_1419","PA_1432","PA_1483","PA_1485","PA_1496","PA_1500","PA_1504","PA_1505","PA_1510"]
+        const abby_invaders = [
+  'PA_346',    'PA_347',  'PA_813',  'PA_1062', 'PA_297',  'PA_295',
+  'PA_1087',   'PA_1085', 'PA_270',  'PA_1067', 'PA_448',  'PA_109',
+  'PA_902',    'PA_430',  'PA_331',  'PA_850',  'PA_851',  'PA_42',
+  'PA_859',    'PA_848',  'PA_99',   'PA_98',   'PA_815',  'PA_550',
+  'PA_1057',   'PA_1059', 'PA_144',  'PA_145',  'PA_948',  'PA_494',
+  'PA_181',    'PA_795',  'PA_07',   'PA_587',  'PA_585',  'PA_240',
+  'PA_629',    'PA_454',  'PA_978',  'PA_183',  'PA_180',  'PA_02',
+  'PA_186',    'PA_311',  'PA_355',  'PA_882',  'PA_941',  'PA_1081',
+  'PA_328',    'PA_200',  'PA_549',  'PA_1019', 'PA_120',  'PA_416',
+  'PA_926',    'PA_839',  'PA_362',  'PA_388',  'PA_780',  'PA_578',
+  'PA_60',     'PA_61',   'PA_250',  'PA_935',  'PA_874',  'PA_870',
+  'PA_803',    'PA_800',  'PA_218',  'PA_1075', 'PA_285',  'PA_674',
+  'PA_677',    'PA_673',  'PA_110',  'PA_370',  'PA_847',  'PA_853',
+  'PA_849',    'PA_229',  'PA_1034', 'PA_468',  'PA_957',  'PA_05',
+  'PA_470',    'PA_46',   'BSL_02',  'BSL_03',  'BSL_04',  'BSL_05',
+  'BSL_06',    'BSL_08',  'BSL_09',  'BSL_10',  'BSL_11',  'BSL_12',
+  'BSL_13',    'BSL_14',  'BSL_15',  'BSL_16',  'BSL_17',  'BSL_18',
+  'BSL_19',    'BSL_20',  'BSL_23',  'LDN_01',  'LDN_03',  'LDN_04',
+  'LDN_05',    'LDN_06',  'LDN_07',  'LDN_08',  'LDN_22',  'LDN_27',
+  'LDN_28',    'LDN_33',  'LDN_35',  'LDN_38',  'LDN_43',  'LDN_46',
+  'LDN_52',    'LDN_53',  'LDN_54',  'LDN_55',  'LDN_67',  'LDN_72',
+  'LDN_76',    'LDN_87',  'LDN_88',  'LDN_95',  'LDN_96',  'LDN_100',
+  'LDN_104',   'LDN_129', 'LDN_135', 'LDN_138', 'MIA_06',  'MIA_61',
+  'MIA_67',    'MIA_72',  'NY_27',   'NY_29',   'NY_31',   'NY_79',
+  'NY_101',    'PA_1130', 'PA_1147', 'PA_1154', 'PA_1163', 'PA_1165',
+  'PA_1172',   'NY_153',  'NY_154',  'NY_157',  'NY_158',  'NY_159',
+  'NY_161',    'NY_162',  'NY_165',  'NY_167',  'NY_168',  'NY_176',
+  'NY_183',    'NY_185',  'PA_1190', 'PA_1196', 'PA_1197', 'PA_1198',
+  'LDN_142',   'LDN_145', 'LDN_148', 'LDN_149', 'LDN_150', 'PA_1207',
+  'PA_1209',   'PA_1212', 'PA_1262', 'PA_1263', 'PA_1268', 'PA_1324',
+  'PA_1350',   'PA_1351', 'LA_176',  'PA_1395', 'PA_1404', 'BSL_25',
+  'DIJ_01',    'DIJ_02',  'DIJ_03',  'DIJ_04',  'DIJ_05',  'DIJ_06',
+  'PA_1418',   'PA_1419', 'PA_1432', 'PA_1445', 'PA_1446', 'PA_1453',
+  'PA_1483',   'PA_1485', 'FTBL_04', 'FTBL_07', 'FTBL_08', 'FTBL_11',
+  'FTBL_12',   'FTBL_13', 'MUN_01',  'MUN_02',  'MUN_03',  'MUN_04',
+  'MUN_06',    'MUN_08',  'MUN_09',  'MUN_05',  'MUN_11',  'MUN_12',
+  'MUN_13',    'MUN_10',  'MUN_14',  'MUN_15',  'MUN_16',  'MUN_17',
+  'MUN_18',    'FTBL_21', 'FTBL_26', 'FTBL_27', 'FTBL_29', 'FTBL_30',
+  'FTBL_37',   'FTBL_42', 'FTBL_43', 'FTBL_44', 'FTBL_45', 'PA_1496',
+  'PA_1500',   'LDN_153', 'LDN_161', 'PA_1504', 'PA_1505', 'PA_1510',
+  'SPACE2ISS'
+]
+
+        const nico_invaders = ["PA_02","PA_03","PA_05","PA_07","PA_13","PA_22","PA_24","PA_25","PA_29","PA_32","PA_34","PA_35","PA_37","PA_42","PA_43","PA_44","PA_48","PA_51","PA_55","PA_60","PA_61","PA_63","PA_65","PA_66","PA_67","PA_71","PA_73","PA_74","PA_76","PA_78","PA_79","PA_81","PA_83","PA_85","PA_86","PA_87","PA_91","PA_92","PA_93","PA_94","PA_98","PA_99","PA_102","PA_106","PA_109","PA_110","PA_112","PA_114","PA_116","PA_124","PA_128","PA_143","PA_145","PA_149","PA_150","PA_151","PA_152","PA_155","PA_158","PA_161","PA_163","PA_167","PA_170","PA_174","PA_177","PA_180","PA_181","PA_183","PA_184","PA_185","PA_186","PA_187","PA_188","PA_189","PA_193","PA_199","PA_212","PA_215","PA_229","PA_230","PA_232","PA_235","PA_238","PA_240","PA_241","PA_247","PA_253","PA_266","PA_268","PA_271","PA_272","PA_273","PA_277","PA_285","PA_294","PA_295","PA_307","PA_308","PA_316","PA_320","PA_321","PA_322","PA_323","PA_327","PA_328","PA_331","PA_334","PA_335","PA_339","PA_340","PA_341","PA_345","PA_346","PA_347","PA_349","PA_354","PA_355","PA_359","PA_360","PA_361","PA_363","PA_364","PA_365","PA_369","PA_370","PA_371","PA_372","PA_376","PA_377","PA_378","PA_379","PA_382","PA_388","PA_389","PA_390","PA_392","PA_394","PA_395","PA_396","PA_398","PA_399","PA_400","PA_401","PA_403","PA_405","PA_406","PA_413","PA_415","PA_417","PA_421","PA_424","PA_427","PA_435","PA_436","PA_439","PA_450","PA_454","PA_456","PA_459","PA_462","PA_463","PA_464","PA_465","PA_468","PA_470","PA_474","PA_475","PA_480","PA_481","PA_482","PA_493","PA_494","PA_495","PA_496","PA_499","PA_501","PA_504","PA_507","PA_514","PA_515","PA_525","PA_528","PA_529","PA_532","PA_534","PA_535","PA_536","PA_543","PA_544","PA_549","PA_550","PA_552","PA_553","PA_556","PA_563","PA_564","PA_566","PA_568","PA_570","PA_571","PA_572","PA_575","PA_578","PA_580","PA_582","PA_583","PA_585","PA_586","PA_587","PA_588","PA_590","PA_592","PA_596","PA_598","PA_604","PA_605","PA_606","PA_612","PA_615","PA_619","PA_624","PA_625","PA_626","PA_627","PA_628","PA_629","PA_632","PA_634","PA_635","PA_636","PA_640","PA_641","PA_642","PA_643","PA_644","PA_645","PA_646","PA_649","PA_651","PA_652","PA_654","PA_655","PA_657","PA_660","PA_661","PA_662","PA_665","PA_667","PA_668","PA_671","PA_672","PA_673","PA_674","PA_675","PA_677","PA_679","PA_680","PA_681","PA_682","PA_683","PA_689","PA_696","PA_702","PA_703","PA_706","PA_707","PA_708","PA_710","PA_711","PA_712","PA_713","PA_715","PA_717","PA_718","PA_719","PA_720","PA_722","PA_727","PA_733","PA_734","PA_735","PA_736","PA_741","PA_744","PA_754","PA_755","PA_756","PA_760","PA_761","PA_764","PA_765","PA_766","PA_769","PA_770","PA_772","PA_775","PA_776","PA_780","PA_781","PA_795","PA_796","PA_797","PA_798","PA_800","PA_802","PA_803","PA_810","PA_811","PA_812","PA_813","PA_814","PA_815","PA_816","PA_820","PA_821","PA_822","PA_827","PA_829","PA_832","PA_836","PA_837","PA_838","PA_839","PA_840","PA_841","PA_842","PA_843","PA_845","PA_846","PA_847","PA_848","PA_849","PA_850","PA_852","PA_853","PA_856","PA_857","PA_858","PA_859","PA_860","PA_864","PA_867","PA_868","PA_869","PA_870","PA_871","PA_873","PA_874","PA_875","PA_876","PA_878","PA_880","PA_881","PA_882","PA_886","PA_893","PA_894","PA_901","PA_902","PA_903","PA_908","PA_919","PA_922","PA_926","PA_932","PA_934","PA_935","PA_940","PA_941","PA_942","PA_945","PA_946","PA_948","PA_949","PA_950","PA_951","PA_953","PA_955","PA_956","PA_957","PA_959","PA_960","PA_961","PA_963","PA_966","PA_967","PA_968","PA_973","PA_974","PA_975","PA_976","PA_977","PA_978","PA_979","PA_980","PA_981","PA_984","PA_987","PA_988","PA_991","PA_992","PA_997","PA_998","PA_999","PA_1004","PA_1005","PA_1008","PA_1009","PA_1012","PA_1013","PA_1014","PA_1016","PA_1017","PA_1019","PA_1023","PA_1024","PA_1025","PA_1027","PA_1032","PA_1033","PA_1034","PA_1039","PA_1040","PA_1045","PA_1046","PA_1047","PA_1049","PA_1050","PA_1051","PA_1053","PA_1054","PA_1056","PA_1057","PA_1058","PA_1059","PA_1060","PA_1062","PA_1063","PA_1064","PA_1065","PA_1066","PA_1067","PA_1068","PA_1069","PA_1070","PA_1071","PA_1072","PA_1075","PA_1076","PA_1077","PA_1078","PA_1080","PA_1081","PA_1084","PA_1085","PA_1086","PA_1087","PA_1088","PA_1091","PA_1094","PA_1097","PA_1098","PA_1099","PA_1100","PA_1102","PA_1103","PA_1104","PA_1107","PA_1108","PA_1111","PA_1120","PA_1121","PA_1122","PA_1123","PA_1126","PA_1127","PA_1129","PA_1130","PA_1134","PA_1135","PA_1137","PA_1140","PA_1143","PA_1144","PA_1147","PA_1148","PA_1151","PA_1153","PA_1154","PA_1156","PA_1157","PA_1158","PA_1159","PA_1161","PA_1163","PA_1164","PA_1165","PA_1166","PA_1168","PA_1170","PA_1171","PA_1172","PA_1173","PA_1174","PA_1175","PA_1176","PA_1178","PA_1179","PA_1180","PA_1185","PA_1186","PA_1187","PA_1189","PA_1190","PA_1196","PA_1197","PA_1198","PA_1199","PA_1200","PA_1201","PA_1202","PA_1203","PA_1205","PA_1206","PA_1207","PA_1208","PA_1209","PA_1210","PA_1211","PA_1212","PA_1213","PA_1214","PA_1216","PA_1220","PA_1221","PA_1222","PA_1227","PA_1228","PA_1229","PA_1231","PA_1235","PA_1236","PA_1237","PA_1240","PA_1241","PA_1243","PA_1244","PA_1245","PA_1246","PA_1249","PA_1252","PA_1253","PA_1255","PA_1256","PA_1257","PA_1258","PA_1260","PA_1262","PA_1263","PA_1254","PA_1266","PA_1268","PA_1269","PA_1270","PA_1272","PA_1273","PA_1278","PA_1279","PA_1280","PA_1281","PA_1283","PA_1288","PA_1289","PA_1290","PA_1296","PA_1298","PA_1299","PA_1301","PA_1303","PA_1304","PA_1305","PA_1307","PA_1308","PA_1311","PA_1314","PA_1316","PA_1317","PA_1319","PA_1321","PA_1322","PA_1329","PA_1331","PA_1332","PA_1337","PA_1338","PA_1340","PA_1343","PA_1344","PA_1347","PA_1349","PA_1350","PA_1351","PA_1352","PA_1353","PA_1354","PA_1355","PA_1357","PA_1358","PA_1359","1360","PA_1362","PA_1363","PA_1366","PA_1370","PA_1371","PA_1373","PA_1374","PA_1375","PA_1376","PA_1380","PA_1383","PA_1384","PA_1385","PA_1392","PA_1395","PA_1397","PA_1404","PA_1407","PA_1412","PA_1418","PA_1419","PA_1423","PA_1424","PA_1432","PA_1433","PA_1437","PA_1439","PA_1444","PA_1445","PA_1446","PA_1447","PA_1448","PA_1449","PA_1452","PA_1453","PA_1454","PA_1456","PA_1458","PA_1459","PA_1461","PA_1463","PA_1464","PA_1468","PA_1469","PA_1470","PA_1472","PA_1473","PA_1477","PA_1480","PA_1483","PA_1485","PA_1487","PA_1489","PA_1496","PA_1499","PA_1500","PA_1501","PA_1502","PA_1505","PA_1506","PA_1512","PA_1518"]
 
         let foundInvadersUserLookup = {
             "Phil": {
+                "visible": true,
                 "markerColor": "darkred",
                 "foundInvaders": phil_invaders,
             },
             "Twon": {
+                "visible": true,
                 "markerColor": "darkblue",
                 "foundInvaders": twon_invaders,
             },
             "Abby": {
+                "visible": true,
                 "markerColor": "lightblue",
                 "foundInvaders": abby_invaders,
             },
             "Nico": {
+                "visible": true,
                 "markerColor": "lightgray",
-                "foundInvaders": ["PA_635", "PA_345", "PA_665"],
+                "foundInvaders": nico_invaders,
             }
         }
 
+        let legendElements = {}
 
-        let foundInvadersCount = {}
-        let commonInvaderCount = {}
-
-        function getCommonInvaderIds(userLists) {
-            let commonList = new Set([]);
-
-
-        }
         function getCollectedIds() {
             console.log('Collecting IDs');
             return new Set([]);
@@ -157,8 +199,18 @@
             return availableMarkerColors[num % availableMarkerColors.length - 2];
         }
 
+        function refreshAllMapPoints() {
+            Object.keys(invaders).forEach(key => {
+                refreshMarker(key);
+            });
+            document.getElementById('map-legend-users').textContent = '';
+            updateLegendCounts()
+        }
+
         function refreshMarker(id) {
             let invader = invaders[id];
+
+            updateSeenBy(id, foundInvadersUserLookup);
 
             // Icon.
             var customIcon = L.AwesomeMarkers.icon({
@@ -220,14 +272,16 @@
             let invader = invaders[invader_id];
             invader.seenBy = new Set([]);
             // for each user in foundInvadersUserLookup, use invader id to add their username to invader.seenBy
-            for (const [user, invaderList] of Object.entries(userLists)) {
-                if (invaderList["foundInvaders"].includes(invader_id)) {
+            for (const [user, userData] of Object.entries(userLists)) {
+                if (userData["visible"] && userData["foundInvaders"].includes(invader_id)) {
                     invader.seenBy.add(user);
                 }
             };
         }
         function updateLegendCounts() {
-            console.log('updating legend');
+            let commonInvaderCount = {}
+            let foundInvadersCount = {}
+
             for (const [id, invader] of Object.entries(invaders)) {
                 if (invader.seenBy.size > 1) {
                     commonInvaderCount[invader.seenBy.size] = (commonInvaderCount[invader.seenBy.size] || 0) + 1;
@@ -239,27 +293,57 @@
             }
 
             for (const [numberOfUsers, count] of Object.entries(commonInvaderCount)) {
-                appendToLegend("", numberOfUsers, getMarkerColor(numberOfUsers), count);
+                appendCombinedCountToLegend(numberOfUsers, getMarkerColor(numberOfUsers), count);
             }
 
             for (const [user, userData] of Object.entries(foundInvadersUserLookup)) {
-                appendToLegend(user, user[0].toLowerCase(), userData['markerColor'], foundInvadersCount[user], userData['foundInvaders'].length);
+                appendUserToLegend(
+                    user,
+                    user[0].toLowerCase(),
+                    userData['markerColor'],
+                    foundInvadersCount[user] || 0,
+                    userData['foundInvaders'].length,
+                    userData["visible"]
+                );
             }
         }
-        function appendToLegend(displayText, icon, markerColor, invaderOnMapCount, totalInvaderCount) {
-            let mapLegend = document.getElementById('map-legend');
+        function checkboxClicked(checkbox) {
+            if (checkbox.checked) {
+                foundInvadersUserLookup[checkbox.value].visible = true;
+            } else {
+                foundInvadersUserLookup[checkbox.value].visible = false;
+            }
+            refreshAllMapPoints()
+        }
+        function appendUserToLegend(displayText, icon, markerColor, invaderOnMapCount, totalInvaderCount, visible) {
+            let mapLegend = document.getElementById('map-legend-users');
 
             let legendEntry = document.createElement('div');
             legendEntry.classList.add('map-legend-item');
+
             legendEntry.innerHTML = `
+            <input id="${displayText}-checkbox" value="${displayText}" onclick="checkboxClicked(this)" type="checkbox" ${visible ? 'checked' : ""}>
             <div class="awesome-marker-icon-${markerColor} awesome-marker" tabindex="0"><i class="fa-solid fa-${icon} icon-white"></i></div>
             <div class="legend-item-text">${displayText}</div>
             <div class="legend-item-text">${invaderOnMapCount}</div>
+            <div class="legend-item-text">(Total: ${totalInvaderCount})</div>
             `;
 
-            if (totalInvaderCount) {
-                legendEntry.innerHTML += `<div class="legend-item-text">(Total: ${totalInvaderCount})</div>`;
-            }
+            mapLegend.appendChild(legendEntry);
+            legendElements[displayText] = legendEntry;
+        }
+
+        function appendCombinedCountToLegend(icon, markerColor, invaderOnMapCount) {
+            let mapLegend = document.getElementById('map-legend-users');
+
+            let legendEntry = document.createElement('div');
+            legendEntry.classList.add('map-legend-item');
+
+            legendEntry.innerHTML += `
+            <div class="awesome-marker-icon-${markerColor} awesome-marker" tabindex="0"><i class="fa-solid fa-${icon} icon-white"></i></div>
+            <div class="legend-item-text">${invaderOnMapCount}</div>
+            `;
+
             mapLegend.appendChild(legendEntry);
         }
 
@@ -272,9 +356,6 @@
             // Markers start off as not visible (not added to the map). This will
             // be changed in refreshMarker.
             invaders[item.id].visible = false;
-            
-            // TWON
-            updateSeenBy(item.id, foundInvadersUserLookup);
 
             refreshMarker(item.id);
         }
